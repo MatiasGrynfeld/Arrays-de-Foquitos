@@ -15,7 +15,7 @@ public class FoquitoScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ActivateNextLight()
@@ -51,5 +51,10 @@ public class FoquitoScript : MonoBehaviour
     public void ActivateRepeating(float t)
     {
         InvokeRepeating(nameof(ActivateNextLight),0,t);
+    }
+
+    public void activarBtn()
+    {
+        ActivateRepeating(0.5f);
     }
 }
