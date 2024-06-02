@@ -7,6 +7,7 @@ public class FoquitoScript : MonoBehaviour
     [SerializeField] GameObject[] colors;
     public int currentLightIndex =-1;
     public int ciclosHechos = 0;
+    public bool destruidos = false;
     void Start()
     {
         
@@ -20,19 +21,22 @@ public class FoquitoScript : MonoBehaviour
 
     public void ActivateNextLight()
     {
-        currentLightIndex++;
-        if (currentLightIndex >= colors.Length)
-        {
-            currentLightIndex = 0;
-            ciclosHechos++;
-            if (ciclosHechos <= 3)
+        if(!destruidos) {
+            currentLightIndex++;
+            if (currentLightIndex >= colors.Length)
             {
-                DeactivateAllLights();
-                CancelInvoke();
+                currentLightIndex = 0;
+                ciclosHechos++;
+                if (ciclosHechos == 3)
+                {
+                    destruidos=true;
+                    DeactivateAllLights();
+                    return;
+                }
             }
+            DeactivateAllLights();
+            colors[currentLightIndex].SetActive(true);
         }
-        DeactivateAllLights();
-        colors[currentLightIndex].SetActive(true);
     }
 
     public void ActivatePreviousLight()
